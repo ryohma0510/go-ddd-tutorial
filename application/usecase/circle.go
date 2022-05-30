@@ -79,13 +79,10 @@ func (service CircleAppService) Join(userID string, circleID string) error {
 		return err
 	}
 
-	// 後でリファクタリングする
-	if len(joiningCircle.Members().Collection()) >= 29 {
-		return errors.New("circle member is full")
+	if err := joiningCircle.Join(joiningUser); err != nil {
+		return err
 	}
 
-	circleMembers := joiningCircle.Members()
-	circleMembers.Add(joiningUser)
 	if err := service.circleRepository.Save(joiningCircle); err != nil {
 		return err
 	}
