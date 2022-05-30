@@ -79,7 +79,7 @@ func (service CircleAppService) Join(userID string, circleID string) error {
 		return err
 	}
 
-	if err := joiningCircle.Join(joiningUser); err != nil {
+	if err := joiningCircle.Join(joiningUser.ID()); err != nil {
 		return err
 	}
 
