@@ -22,12 +22,3 @@ func (c Circle) Owner() User {
 func (c Circle) Members() CircleMembers {
 	return c.members
 }
-
-func NewCircle(id CircleID, name CircleName, owner User, members CircleMembers) (Circle, error) {
-	return Circle{
-		id:      id,
-		name:    name,
-		owner:   owner,
-		members: members,
-	}, nil
-}

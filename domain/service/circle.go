@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"go-ddd-tutorial/domain/model"
 	"go-ddd-tutorial/domain/repository"
 )
@@ -15,10 +14,10 @@ func NewCircleDomainService(repo repository.ICircleRepository) (CircleDomainServ
 }
 
 func (service CircleDomainService) Exists(circle model.Circle) (bool, error) {
-	_, isFound, err := service.circleRepository.FindByName(circle.Name())
+	_, err := service.circleRepository.FindByName(circle.Name())
 	if err != nil {
-		return false, fmt.Errorf("unknown error while finding circle by name: %w", err)
+		return false, err
 	}
 
-	return isFound, nil
+	return true, nil
 }
