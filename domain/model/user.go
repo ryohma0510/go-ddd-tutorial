@@ -7,3 +7,8 @@ type User struct {
 func (u User) ID() UserID {
 	return u.id
 }
+
+func (u User) IsPremium() bool {
+	// 適当
+	return true
+}

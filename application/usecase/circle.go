@@ -7,6 +7,7 @@ import (
 	"go-ddd-tutorial/domain/model"
 	"go-ddd-tutorial/domain/repository"
 	"go-ddd-tutorial/domain/service"
+	"go-ddd-tutorial/domain/spec"
 )
 
 var (
@@ -77,6 +78,11 @@ func (service CircleAppService) Join(userID string, circleID string) error {
 	joiningCircle, err := service.circleRepository.FindByID(joiningCircleID)
 	if err != nil {
 		return err
+	}
+
+	circleFullSpec := spec.NewCircleFullSpec(service.userRepository)
+	if !circleFullSpec.IsSatisfiedByCircle(joiningCircle) {
+		return errors.New("circle is full")
 	}
 
 	if err := joiningCircle.Join(joiningUser.ID()); err != nil {
